@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>welcome</title>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const userId = sessionStorage.getItem("userId");
+    const password = sessionStorage.getItem("password");
+
+    document.getElementById("userid").innerText = userId ? `${userId}` : "无信息";
+    document.getElementById("mobile-userid").innerText = userId ? `${userId}` : "无信息";
+  });
+
+  function Logout() {
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("password");
+
+    location.href = "index.html";
+  }
+  </script>
+
+  <style>
+    :root {
+      --used-traffic: 27.43;
+      --max-traffic: 50;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #e6e6e6;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    h1, h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: inherit;
+    }
+
+    .desktop-layout {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-layout {
+      display: none;
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    @media screen and (max-width: 768px) {
+      .desktop-layout {
+        display: none;
+      }
+      .mobile-layout {
+        display: flex;
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      padding: 20px
+    }
+
+    .main-container {
+      width: 610px;
+      height: 360px; /* 已计算 */
+      position: relative;
+    }
+
+    .link-container {
+      margin-top: 40px;
+      align-self: flex-end;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .msg-box {
+      position: relative;
+    }
+
+    .msg {
+      background-color: #e74e2e;
+      width: 550px;
+      height: 250px;
+    }
+
+    .msg-shadow {
+      width: 450px;
+      height: 25px;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 50%;
+      position: absolute;
+      top: 330px;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: blur(8px);
+    }
+
+    .msg-text-box {
+      width: 140px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #ffffff;
+    }
+
+    .emoji {
+      font-size: 100px;
+      margin-top: -25px;
+    }
+
+    .welcome-cn {
+      font-size: 35px;
+      margin-top: -15px;
+    }
+
+    .welcome-en {
+      font-size: 20px;
+    }
+
+    .msg-triangle {
+      --triangle-size: 40px;
+      width: 0;
+      height: 0;
+      position: relative;
+      top: calc(-1 * var(--triangle-size));
+      border-left: var(--triangle-size) solid transparent;
+      border-right: var(--triangle-size) solid transparent;
+      border-top: var(--triangle-size) solid #e74e2e;
+      border-bottom: var(--triangle-size) solid transparent;
+      transform-origin: center;
+      transform: rotate(135deg);
+    }
+
+    .info-box{
+      background-color: #f2f2f2;
+      height: 300px;
+      width: 450px;
+      position: absolute;
+      top: 40px;
+      left: 140px;
+      padding: 35px;
+      box-sizing: border-box; /* width 现在包含 padding */
+      box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .username {
+      font-size: 35px;
+      color: #e74e2e;
+      margin-bottom: 10px;
+    }
+
+    .info-item {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .info-item-text {
+      width: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: end;
+      color: #000000;
+      font-size: 15px;
+    }
+
+    .info-item-content {
+      flex-grow: 1;
+      height: 90%;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+
+    .data-duration {
+      font-size: 30px;
+      color: #e74e2e;
+    }
+
+    .logout-box {
+      background-color: #ffffff;
+      width: 230px;
+      height: 80px;
+      position: absolute;
+      top: 270px;
+      left: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .logout-button {
+      width: 190px;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #c0becc;
+      color: #32303e;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border: none;
+    }
+
+    .logout-button:hover {
+      background-color: #b0aebb;
+    }
+
+    .logout-button:active {
+      background-color: #a09aaa;
+    }
+
+    .disconnect-cn {
+      font-size: 20px;
+    }
+
+    .disconnect-en {
+      font-size: 18px;
+      margin-top: -6px
+    }
+
+    .logout-triangle {
+      --triangle-size: 20px;
+      width: var(--triangle-size);
+      height: var(--triangle-size);
+      background-color: #c7c7c7;
+      position: absolute;
+      top: calc(-1 * var(--triangle-size));
+      right: 0;
+      clip-path: polygon(100% 100%, 0% 0%, 0% 100%);
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .progress-real {
+      width: 95%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .progress-labels {
+      position: relative;
+      width: 100%;
+      height: 15px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      flex-grow: 1;
+      position: relative;
+      margin-bottom: 5px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .progress-degree {
+      width: 20%;
+      height: 100%;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: min(calc(var(--used-traffic) / var(--max-traffic) * 100%), 100%);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #fbb03b;
+    }
+
+    .progress-label {
+      position: absolute;
+      font-size: 12px;
+      color: #666;
+      transform: translateX(-100%);
+      top: 0;
+    }
+
+    .progress-end {
+      width: 5%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .progress-end > .progress-bar {
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .progress-end-bar {
+        flex: 1;
+    }
+
+    .progress-end-bar:nth-child(even) {
+        background-color: #9f9d9e;
+    }
+
+    .data-usage {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 26px;
+      color: #555555;
+    }
+
+    .link-item {
+      width: 70px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: end;
+      color: #e74e2e;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .link-logo {
+      width: 25px;
+      height: 25px;
+      fill: #e98e6d;
+      transition: all 0.3s ease;
+    }
+
+    .link-item:hover {
+      color: #c73e1e;
+    }
+
+    .link-item:hover .link-logo {
+      fill: #c73e1e;
+    }
+
+    .link-item:active {
+      color: #a32e18;
+    }
+
+    .link-item:active .link-logo {
+      fill: #a32e18;
+    }
+
+
+    /* ********Mobile Styles******** */
+    
+    .mobile-container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 20px
+    }
+
+    .mobile-header-card {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .mobile-welcome {
+      background-color: #e74e2e;
+      color: white;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      margin-bottom: 30px;
+    }
+
+    .mobile-welcome-cn {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .mobile-welcome-en {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .mobile-info-card {
+      background-color: #f2f2f2;
+      width: 100%;
+      max-width: 400px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      box-sizing: border-box;
+      margin-bottom: 30px;
+    }
+
+    .mobile-username {
+      font-size: 32px;
+      color: #e74e2e;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .mobile-info-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .mobile-info-value {
+      font-size: 24px;
+      color: #e74e2e;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .mobile-logout-card {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      box-sizing: border-box;
+      margin-bottom: 30px;
+    }
+
+    .mobile-logout-button {
+      width: 100%;
+      padding: 15px;
+      background-color: #c0becc;
+      color: #32303e;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-logout-button:hover {
+      background-color: #b0aebb;
+    }
+
+    .mobile-logout-button:active {
+      background-color: #a09aaa;
+    }
+
+    .mobile-disconnect-cn {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .mobile-disconnect-en {
+      font-size: 16px;
+    }
+
+    .mobile-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .mobile-link-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #e74e2e;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-link-logo {
+      width: 30px;
+      height: 30px;
+      fill: #e98e6d;
+      transition: all 0.3s ease;
+      margin-bottom: 8px;
+    }
+
+    .mobile-link-label {
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .mobile-link-item:hover {
+      color: #c73e1e;
+    }
+
+    .mobile-link-item:hover .mobile-link-logo {
+      fill: #c73e1e;
+    }
+
+    .mobile-link-item:active {
+      color: #a32e18;
+    }
+
+    .mobile-link-item:active .mobile-link-logo {
+      fill: #a32e18;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="desktop-layout">
+    <div class="container">
+      <div class="main-container">
+        <div class="msg-box">
+          <div class="msg">
+            <div class="msg-text-box">
+              <p class="emoji">:P</p>
+              <p class="welcome-cn">欢迎,</p>
+              <p class="welcome-en">Welcome,</p>
+            </div>
+          </div>
+          <div class="msg-triangle"></div>
+          <div class="msg-shadow"></div>
+        </div>
+        <div class="info-box">
+          <h1 class="username" id="userid">lizy14</h1>
+          <div class="info-item">
+            <div class="info-item-text">
+              <h2>已连接</h2>
+              <p>Duration</p>
+            </div>
+            <div class="info-item-content">
+              <p class="data-duration">00:07:03</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-text">
+              <h2>已用流量</h2>
+              <p>Usage</p>
+            </div>
+            <div class="info-item-content">
+              <div class="progress-container">
+                <div class="progress-real">
+                  <div class="progress-labels">
+                    <span class="progress-label" style="left: 40%">20</span>
+                    <span class="progress-label" style="left: 60%">30</span>
+                    <span class="progress-label" style="left: 80%">40</span>
+                    <span class="progress-label" style="left: 100%">50</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-degree" style="background-color: #ffffff;"></div>
+                    <div class="progress-degree" style="background-color: #ffffff;"></div>
+                    <div class="progress-degree" style="background-color: #e6e3e7;"></div>
+                    <div class="progress-degree" style="background-color: #dbd5d7;"></div>
+                    <div class="progress-degree" style="background-color: #cec8ca;"></div>
+                    <div class="progress-fill"></div>
+                    <p class="data-usage">27.43G</p>
+                  </div>
+                </div>
+                <div class="progress-end">
+                  <div class="progress-labels"></div>
+                  <div class="progress-bar">
+                    <div class="progress-end-bar"></div>
+                    <div class="progress-end-bar"></div>
+                    <div class="progress-end-bar"></div>
+                    <div class="progress-end-bar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="logout-box">
+          <div class="logout-triangle"></div>
+          <button class="logout-button" onclick="Logout()">
+            <p class="disconnect-cn">断开连接</p>
+            <p class="disconnect-en">Disconnect</p>
+          </button>
+        </div>
+      </div>
+      <div class="link-container">
+        <div class="link-item">
+          <svg t="1751111576430" class="link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1641" width="200" height="200"><path d="M306.304 960c8.32 0 16.128-2.176 23.424-6.592 7.296-4.352 16.064-11.52 26.304-21.376l148.48-140.8h265.344c40.768 0 75.2-7.872 103.36-23.552a155.648 155.648 0 0 0 64.512-67.84c14.848-29.568 22.272-65.408 22.272-107.52v-328.96c0-42.176-7.424-78.016-22.272-107.52a156.928 156.928 0 0 0-64.512-68.096C845.056 71.936 810.56 64 769.92 64H254.144c-40.768 0-75.2 7.936-103.36 23.744a156.928 156.928 0 0 0-64.512 68.096C71.424 185.28 64 221.12 64 263.36v328.96c0 42.112 7.488 77.952 22.4 107.52 14.464 28.992 36.928 52.608 64.384 67.84 27.904 15.68 61.376 23.552 100.48 23.552h16.64v122.944c0 13.888 3.264 25.024 9.856 33.28 6.592 8.384 16.128 12.544 28.544 12.544zM512.64 500.736c-24.576 0-37.248-12.992-38.08-39.04l-5.632-213.696a40.896 40.896 0 0 1 11.328-31.552 42.496 42.496 0 0 1 32-12.544c12.864 0 23.552 4.16 31.936 12.544 8.32 8.192 12.608 19.968 11.712 32l-6.528 212.864c-0.512 26.24-12.8 39.424-36.736 39.424z m0 145.92a49.92 49.92 0 0 1-35.008-13.632 45.12 45.12 0 0 1-14.72-34.752 46.08 46.08 0 0 1 14.528-34.752 48.96 48.96 0 0 1 35.2-14.016c13.44 0 25.088 4.672 34.752 14.016a46.272 46.272 0 0 1 14.592 34.752 45.44 45.44 0 0 1-14.592 34.752 49.28 49.28 0 0 1-34.752 13.568z" p-id="1642"></path></svg>
+          <p class="link-label">Info</p>
+        </div>
+        <div class="link-item">
+          <svg t="1751094218093" class="link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M481.216 64v238.912c-0.192 20.928 4.864 34.624 15.04 41.152 8.768 5.568 23.744 5.376 45.056-0.512l86.72-43.456 86.4 39.872c16.384 10.048 31.36 10.24 44.928 0.512 9.728-7.04 14.592-19.456 14.592-37.376V64h61.568c51.072 0 92.48 40.128 92.48 89.6v716.8c0 49.472-41.408 89.6-92.416 89.6H311.68V64h169.472zM250.048 64v896h-61.632c-51.008 0-92.416-40.128-92.416-89.6V153.6c0-49.472 41.408-89.6 92.416-89.6h61.632z m462.208 0v194.112l-84.288-46.464-85.12 46.464V64h169.408z" p-id="1161"></path></svg>
+          <p class="link-label">Lib</p>
+        </div>
+        <div class="link-item">
+          <svg t="1751111633506" class="link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1961" width="200" height="200"><path d="M965.504 815.488a62.592 62.592 0 0 1-11.456 49.28 63.616 63.616 0 0 1-43.264 26.432l-109.696 17.536a62.72 62.72 0 0 1-48.896-11.456 64.128 64.128 0 0 1-27.008-43.328L632 263.936a66.688 66.688 0 0 1 1.344-26.048c2.048-8.256 5.76-16 10.496-22.848a58.368 58.368 0 0 1 18.88-17.344c7.744-4.608 16.192-7.936 25.152-9.6l108.8-17.408a61.504 61.504 0 0 1 49.216 11.904c14.592 10.944 23.424 25.6 26.496 43.84l93.12 589.056zM506.176 167.04c18.304 0 33.792 6.4 46.528 19.2 12.8 12.8 19.2 28.352 19.2 46.528v609.984c0 18.304-6.4 33.856-19.2 46.528-12.8 12.8-28.352 19.2-46.528 19.2H411.136a63.488 63.488 0 0 1-46.656-19.2 63.36 63.36 0 0 1-19.2-46.528V232.768c0-18.304 4.928-33.856 14.656-46.528 9.728-12.8 24-19.2 42.88-19.2h103.36z m0 460.224c6.08 0 11.328-2.816 15.552-8.576a34.496 34.496 0 0 0 6.4-20.48 33.92 33.92 0 0 0-6.4-21.12 18.816 18.816 0 0 0-15.552-8.192H411.2a19.136 19.136 0 0 0-15.488 8.256 33.536 33.536 0 0 0-6.4 21.12 32.96 32.96 0 0 0 6.4 20.48 18.624 18.624 0 0 0 15.488 8.512H506.24z m0-115.968c6.08 0 11.328-2.816 15.552-8.576a35.2 35.2 0 0 0 6.4-21.44 33.92 33.92 0 0 0-6.4-21.12 18.816 18.816 0 0 0-15.552-8.32H411.2a19.136 19.136 0 0 0-15.488 8.32 33.472 33.472 0 0 0-6.4 21.12c0 8.64 2.112 15.744 6.4 21.44 4.224 5.76 9.472 8.576 15.488 8.576H506.24zM219.392 167.04c17.6-0.192 34.496 6.656 46.976 19.2 12.992 12.8 19.52 28.352 19.52 46.528v609.984a62.464 62.464 0 0 1-19.52 46.528 65.28 65.28 0 0 1-46.976 19.2H124.288a64.64 64.64 0 0 1-46.912-19.2 62.4 62.4 0 0 1-19.584-46.528V232.768a62.464 62.464 0 0 1 19.584-46.528 65.28 65.28 0 0 1 46.912-19.2h95.104zM128 395.328a19.968 19.968 0 0 0-16.448 8.256 32.832 32.832 0 0 0-6.4 21.12 32.96 32.96 0 0 0 6.4 20.48c4.224 5.696 9.728 8.512 16.448 8.512h87.68a18.048 18.048 0 0 0 15.872-8.512 35.328 35.328 0 0 0 5.952-20.48 35.264 35.264 0 0 0-5.952-21.12 18.56 18.56 0 0 0-16-8.256H128z m91.328 286.784c6.4 0.256 12.352-2.944 15.872-8.192a33.28 33.28 0 0 0 5.952-20.096c0-8.576-1.92-15.36-5.952-20.48a18.816 18.816 0 0 0-15.872-7.744H128a20.352 20.352 0 0 0-16.448 7.744 31.296 31.296 0 0 0-6.4 20.48c0 7.872 2.176 14.592 6.4 20.096a19.84 19.84 0 0 0 16.448 8.192h91.328z m0-112.32c6.4 0.256 12.352-2.944 15.872-8.192a34.688 34.688 0 0 0 5.952-21.056 35.264 35.264 0 0 0-5.952-21.12 18.816 18.816 0 0 0-15.872-8.192H128a19.968 19.968 0 0 0-16.448 8.192 33.536 33.536 0 0 0-6.4 21.12c0 8.704 2.176 15.552 6.4 21.056a19.712 19.712 0 0 0 16.448 8.128l91.328 0.064z" p-id="1962"></path></svg>
+          <p class="link-label">Learn</p>
+        </div>
+        <div class="link-item">
+          <svg t="1751111607920" class="link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1801" width="200" height="200"><path d="M960 436.608v419.968a82.56 82.56 0 0 1-84.032 84.032H148.032A82.56 82.56 0 0 1 64 856.576V436.608l392 246.4a139.072 139.072 0 0 0 140.032 0L960 436.608z m-364.032 112c16.832 0 28.032 11.2 28.032 27.968 0 16.832-11.2 28.032-28.032 28.032H428.032c-16.832 0-28.032-11.2-28.032-28.032 0-16.768 11.2-27.968 28.032-27.968h168z m56.064-112c16.768 0 27.968 11.2 27.968 27.968 0 16.832-11.2 28.032-28.032 28.032H372.096c-16.832 0-28.032-11.2-28.032-28.032 0-16.768 11.2-27.968 28.032-27.968h280zM470.016 97.792a102.592 102.592 0 0 1 109.184 2.816l341.568 237.952c16.832 11.2 16.832 42.048 0 53.248l-128.768 86.784V347.008a24.064 24.064 0 0 0-22.4-22.4h-515.2a24.064 24.064 0 0 0-22.4 22.4V472.96L105.984 391.808c-19.584-11.2-19.584-42.048 0-56z" p-id="1802"></path></svg>
+          <p class="link-label">Mail</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mobile-layout">
+    <div class="mobile-container">
+      <div class="mobile-header-card">
+        <div class="mobile-welcome">
+          <h1 class="mobile-welcome-cn">欢迎</h1>
+          <p class="mobile-welcome-en">Welcome</p>
+        </div>
+      </div>
+
+      <div class="mobile-info-card">
+        <h1 class="mobile-username" id="mobile-userid">lizy14</h1>
+        
+        <div class="mobile-info-item">
+          <div class="mobile-info-label">
+            <h2>已连接 </h2>
+            <p>Duration</p>
+          </div>
+          <div class="mobile-info-value">00:07:03</div>
+        </div>
+
+        <div class="mobile-info-item">
+          <div class="mobile-info-label">
+            <h2>已用流量</h2>
+            <p>Usage</p>
+          </div>
+          <div class="mobile-info-value">27.43G</div>
+        </div>
+      </div>
+
+      <div class="mobile-logout-card">
+        <button class="mobile-logout-button" onclick="Logout()">
+          <div class="mobile-disconnect-cn">断开连接</div>
+          <div class="mobile-disconnect-en">Disconnect</div>
+        </button>
+      </div>
+
+      <div class="mobile-links">
+        <div class="mobile-link-item">
+          <svg t="1751111576430" class="mobile-link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1641" width="200" height="200"><path d="M306.304 960c8.32 0 16.128-2.176 23.424-6.592 7.296-4.352 16.064-11.52 26.304-21.376l148.48-140.8h265.344c40.768 0 75.2-7.872 103.36-23.552a155.648 155.648 0 0 0 64.512-67.84c14.848-29.568 22.272-65.408 22.272-107.52v-328.96c0-42.176-7.424-78.016-22.272-107.52a156.928 156.928 0 0 0-64.512-68.096C845.056 71.936 810.56 64 769.92 64H254.144c-40.768 0-75.2 7.936-103.36 23.744a156.928 156.928 0 0 0-64.512 68.096C71.424 185.28 64 221.12 64 263.36v328.96c0 42.112 7.488 77.952 22.4 107.52 14.464 28.992 36.928 52.608 64.384 67.84 27.904 15.68 61.376 23.552 100.48 23.552h16.64v122.944c0 13.888 3.264 25.024 9.856 33.28 6.592 8.384 16.128 12.544 28.544 12.544zM512.64 500.736c-24.576 0-37.248-12.992-38.08-39.04l-5.632-213.696a40.896 40.896 0 0 1 11.328-31.552 42.496 42.496 0 0 1 32-12.544c12.864 0 23.552 4.16 31.936 12.544 8.32 8.192 12.608 19.968 11.712 32l-6.528 212.864c-0.512 26.24-12.8 39.424-36.736 39.424z m0 145.92a49.92 49.92 0 0 1-35.008-13.632 45.12 45.12 0 0 1-14.72-34.752 46.08 46.08 0 0 1 14.528-34.752 48.96 48.96 0 0 1 35.2-14.016c13.44 0 25.088 4.672 34.752 14.016a46.272 46.272 0 0 1 14.592 34.752 45.44 45.44 0 0 1-14.592 34.752 49.28 49.28 0 0 1-34.752 13.568z" p-id="1642"></path></svg>
+          <p class="mobile-link-label">Info</p>
+        </div>
+        <div class="mobile-link-item">
+          <svg t="1751094218093" class="mobile-link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M481.216 64v238.912c-0.192 20.928 4.864 34.624 15.04 41.152 8.768 5.568 23.744 5.376 45.056-0.512l86.72-43.456 86.4 39.872c16.384 10.048 31.36 10.24 44.928 0.512 9.728-7.04 14.592-19.456 14.592-37.376V64h61.568c51.072 0 92.48 40.128 92.48 89.6v716.8c0 49.472-41.408 89.6-92.416 89.6H311.68V64h169.472zM250.048 64v896h-61.632c-51.008 0-92.416-40.128-92.416-89.6V153.6c0-49.472 41.408-89.6 92.416-89.6h61.632z m462.208 0v194.112l-84.288-46.464-85.12 46.464V64h169.408z" p-id="1161"></path></svg>
+          <p class="mobile-link-label">Lib</p>
+        </div>
+        <div class="mobile-link-item">
+          <svg t="1751111633506" class="mobile-link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1961" width="200" height="200"><path d="M965.504 815.488a62.592 62.592 0 0 1-11.456 49.28 63.616 63.616 0 0 1-43.264 26.432l-109.696 17.536a62.72 62.72 0 0 1-48.896-11.456 64.128 64.128 0 0 1-27.008-43.328L632 263.936a66.688 66.688 0 0 1 1.344-26.048c2.048-8.256 5.76-16 10.496-22.848a58.368 58.368 0 0 1 18.88-17.344c7.744-4.608 16.192-7.936 25.152-9.6l108.8-17.408a61.504 61.504 0 0 1 49.216 11.904c14.592 10.944 23.424 25.6 26.496 43.84l93.12 589.056zM506.176 167.04c18.304 0 33.792 6.4 46.528 19.2 12.8 12.8 19.2 28.352 19.2 46.528v609.984c0 18.304-6.4 33.856-19.2 46.528-12.8 12.8-28.352 19.2-46.528 19.2H411.136a63.488 63.488 0 0 1-46.656-19.2 63.36 63.36 0 0 1-19.2-46.528V232.768c0-18.304 4.928-33.856 14.656-46.528 9.728-12.8 24-19.2 42.88-19.2h103.36z m0 460.224c6.08 0 11.328-2.816 15.552-8.576a34.496 34.496 0 0 0 6.4-20.48 33.92 33.92 0 0 0-6.4-21.12 18.816 18.816 0 0 0-15.552-8.192H411.2a19.136 19.136 0 0 0-15.488 8.256 33.536 33.536 0 0 0-6.4 21.12 32.96 32.96 0 0 0 6.4 20.48 18.624 18.624 0 0 0 15.488 8.512H506.24z m0-115.968c6.08 0 11.328-2.816 15.552-8.576a35.2 35.2 0 0 0 6.4-21.44 33.92 33.92 0 0 0-6.4-21.12 18.816 18.816 0 0 0-15.552-8.32H411.2a19.136 19.136 0 0 0-15.488 8.32 33.472 33.472 0 0 0-6.4 21.12c0 8.64 2.112 15.744 6.4 21.44 4.224 5.76 9.472 8.576 15.488 8.576H506.24zM219.392 167.04c17.6-0.192 34.496 6.656 46.976 19.2 12.992 12.8 19.52 28.352 19.52 46.528v609.984a62.464 62.464 0 0 1-19.52 46.528 65.28 65.28 0 0 1-46.976 19.2H124.288a64.64 64.64 0 0 1-46.912-19.2 62.4 62.4 0 0 1-19.584-46.528V232.768a62.464 62.464 0 0 1 19.584-46.528 65.28 65.28 0 0 1 46.912-19.2h95.104zM128 395.328a19.968 19.968 0 0 0-16.448 8.256 32.832 32.832 0 0 0-6.4 21.12 32.96 32.96 0 0 0 6.4 20.48c4.224 5.696 9.728 8.512 16.448 8.512h87.68a18.048 18.048 0 0 0 15.872-8.512 35.328 35.328 0 0 0 5.952-20.48 35.264 35.264 0 0 0-5.952-21.12 18.56 18.56 0 0 0-16-8.256H128z m91.328 286.784c6.4 0.256 12.352-2.944 15.872-8.192a33.28 33.28 0 0 0 5.952-20.096c0-8.576-1.92-15.36-5.952-20.48a18.816 18.816 0 0 0-15.872-7.744H128a20.352 20.352 0 0 0-16.448 7.744 31.296 31.296 0 0 0-6.4 20.48c0 7.872 2.176 14.592 6.4 20.096a19.84 19.84 0 0 0 16.448 8.192h91.328z m0-112.32c6.4 0.256 12.352-2.944 15.872-8.192a34.688 34.688 0 0 0 5.952-21.056 35.264 35.264 0 0 0-5.952-21.12 18.816 18.816 0 0 0-15.872-8.192H128a19.968 19.968 0 0 0-16.448 8.192 33.536 33.536 0 0 0-6.4 21.12c0 8.704 2.176 15.552 6.4 21.056a19.712 19.712 0 0 0 16.448 8.128l91.328 0.064z" p-id="1962"></path></svg>
+          <p class="mobile-link-label">Learn</p>
+        </div>
+        <div class="mobile-link-item">
+          <svg t="1751111607920" class="mobile-link-logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1801" width="200" height="200"><path d="M960 436.608v419.968a82.56 82.56 0 0 1-84.032 84.032H148.032A82.56 82.56 0 0 1 64 856.576V436.608l392 246.4a139.072 139.072 0 0 0 140.032 0L960 436.608z m-364.032 112c16.832 0 28.032 11.2 28.032 27.968 0 16.832-11.2 28.032-28.032 28.032H428.032c-16.832 0-28.032-11.2-28.032-28.032 0-16.768 11.2-27.968 28.032-27.968h168z m56.064-112c16.768 0 27.968 11.2 27.968 27.968 0 16.832-11.2 28.032-28.032 28.032H372.096c-16.832 0-28.032-11.2-28.032-28.032 0-16.768 11.2-27.968 28.032-27.968h280zM470.016 97.792a102.592 102.592 0 0 1 109.184 2.816l341.568 237.952c16.832 11.2 16.832 42.048 0 53.248l-128.768 86.784V347.008a24.064 24.064 0 0 0-22.4-22.4h-515.2a24.064 24.064 0 0 0-22.4 22.4V472.96L105.984 391.808c-19.584-11.2-19.584-42.048 0-56z" p-id="1802"></path></svg>
+          <p class="mobile-link-label">Mail</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
